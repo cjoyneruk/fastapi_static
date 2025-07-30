@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
-from .build import SITE_DIR, SITE_STATIC_DIR
+from config import settings
 
 def construct_handler(file: Path):
 
@@ -17,14 +17,13 @@ def construct_handler(file: Path):
     
     return handler
 
-
-pages = SITE_DIR.glob('**/index.html')
+pages = settings.SITE_DIR.glob('**/index.html')
 
 app = FastAPI(
     title='Static app'
 )
 
-app.mount("/static", StaticFiles(directory=SITE_STATIC_DIR), name="static")
+app.mount("/static", StaticFiles(directory=settings.SITE_STATIC_DIR), name="static")
 
 for page in pages:
 

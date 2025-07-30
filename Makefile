@@ -6,7 +6,7 @@ init-venv:
 	uv pip install -r requirements.txt
 
 build:
-	uv run src/build.py
+	uv run src/app/build.py
 
 view:
-	uv run uvicorn src.view:app --port 8090
+	uv run uvicorn src.app.view:app --port 8090

@@ -13,6 +13,8 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest # Specifies the runner environment
+    env:
+      PYTHONPATH: ${{ github.workspace }}/src/app
 
     steps:
       - name: Checkout repository

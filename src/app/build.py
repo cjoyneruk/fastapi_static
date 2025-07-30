@@ -1,14 +1,9 @@
-from .app.main import app, STATIC_DIR
+from main import app
 from fastapi.routing import APIRoute
 from fastapi.testclient import TestClient
-from pathlib import Path
+from config import settings
 import os
 import shutil
-
-SRC_DIR = Path(__file__).resolve().parent
-ROOT_DIR = SRC_DIR.parent
-SITE_DIR = ROOT_DIR / 'site'
-SITE_STATIC_DIR = SITE_DIR / 'static'
 
 if __name__ == '__main__':
 
@@ -24,7 +19,7 @@ if __name__ == '__main__':
 
                 html = response.text
 
-                local_path = SITE_DIR / url.strip('/') / 'index.html'
+                local_path = settings.SITE_DIR / url.strip('/') / 'index.html'
                 
                 os.makedirs(local_path.parent, exist_ok=True)
                 
@@ -35,7 +30,7 @@ if __name__ == '__main__':
 
     print('Copying static files')
 
-    if SITE_STATIC_DIR.exists():
-        shutil.rmtree(SITE_STATIC_DIR)
+    if settings.SITE_STATIC_DIR.exists():
+        shutil.rmtree(settings.SITE_STATIC_DIR)
 
-    shutil.copytree(STATIC_DIR, SITE_STATIC_DIR)
+    shutil.copytree(settings.STATIC_DIR, settings.SITE_STATIC_DIR)
