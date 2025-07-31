@@ -32,14 +32,7 @@ jobs:
         run: |
           make init-venv
           make build
-
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5 # Configures the GitHub Pages environment
-        with:
-          # This tells GitHub Pages where to find your static files.
-          # It should point to the directory containing your index.html and other assets.
-          static_site_generator: custom # Use 'custom' because we're specifying the path directly
-          
+                    
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3 # Uploads the 'site' directory as an artifact
         with:
